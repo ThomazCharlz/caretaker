@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Care Taker</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+    <!-- Minimal Nav -->
+    <nav class="navbar" style="background-color: #111;">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Care<span>Taker</span> <span style="font-size:1rem; color:#888;">(Admin)</span></a>
+        </div>
+    </nav>
+
+    <div class="section" style="padding-top: 3rem; flex: 1;">
+        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+            <h2 class="section-title">Admin Dashboard</h2>
+            <p class="section-desc">Manage residents, respond to enquiries, and configure daily offers.</p>
+        </div>
+
+        <div class="card-grid" style="grid-template-columns: 1fr;">
+            
+            <!-- Resident Approvals -->
+            <div class="feature-card" style="align-items: stretch; text-align: left;">
+                <h3 class="feature-title"><i class="fas fa-users" style="color: #ffd700;"></i> Resident Approvals</h3>
+                <table class="admin-table" id="residentTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Flat</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Enquiries -->
+            <div class="feature-card" style="align-items: stretch; text-align: left;">
+                <h3 class="feature-title"><i class="fas fa-inbox" style="color: #ffd700;"></i> Enquiries</h3>
+                <table class="admin-table" id="enquiryTable">
+                    <thead>
+                        <tr>
+                            <th>Tracking ID</th>
+                            <th>Customer</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Offer of the Day -->
+            <div class="feature-card" style="align-items: stretch; text-align: left;">
+                <h3 class="feature-title"><i class="fas fa-tags" style="color: #ffd700;"></i> Setup Offer of the Day</h3>
+                <form id="offerForm">
+                    <div style="margin-bottom: 1rem;">
+                        <input type="text" id="offerTitle" placeholder="Offer Title (e.g., 50% Off organic veg!)" style="width: 100%; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color:#fff;" required>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea id="offerDesc" rows="3" placeholder="Offer Description" style="width: 100%; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color:#fff;" required></textarea>
+                    </div>
+                    <label style="color:#fff; display:block; margin-bottom: 1rem;">
+                        <input type="checkbox" id="offerActive"> Check to make this offer Active on the Home Page
+                    </label>
+                    <button type="submit" class="action-btn">Update Offer</button>
+                    <button type="button" class="action-btn" onclick="clearDb()" style="background:none; border:1px solid #ff4444; color:#ff4444; margin-left:1rem;">Reset DB</button>
+                </form>
+            </div>
+
+            <!-- Client Access QR Code -->
+            <div class="feature-card" style="align-items: center; text-align: center;">
+                <h3 class="feature-title"><i class="fas fa-qrcode" style="color: #ffd700;"></i> Share Web App</h3>
+                <p class="feature-desc" style="margin-bottom: 1rem;">Scan or send this QR code directly to residents to give them instant access to Care Taker.</p>
+                <div style="background: #fff; padding: 10px; border-radius: 10px; display: inline-block;">
+                    <!-- QR code pointing to spectrumsspace.com -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spectrumsspace.com/" alt="QR Code" width="150" height="150">
+                </div>
+                <button class="action-btn" onclick="alert('Link copied to clipboard (Mocked)!')" style="margin-top: 1rem;">Copy Site Link</button>
+            </div>
+
+            <!-- Society Branding (NEW) -->
+            <div class="feature-card" style="align-items: stretch; text-align: left;">
+                <h3 class="feature-title"><i class="fas fa-building" style="color: #ffd700;"></i> Society Branding</h3>
+                <p class="feature-desc" style="margin-bottom: 1rem;">Personalize the landing page for the specific Flat/Tower (e.g. SFS, Confident).</p>
+                <form id="brandingForm">
+                    <div style="margin-bottom: 1rem;">
+                        <input type="text" id="societyName" placeholder="Society Name (e.g. Asset Homes)" style="width: 100%; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color:#fff;" required>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color:#ffd700; margin-bottom: 0.5rem; display:block;">Upload Flat Picture</label>
+                        <input type="file" id="societyImage" accept="image/*" style="width: 100%; color:#fff;">
+                    </div>
+                    <!-- Preview Image if exists -->
+                    <img id="societyImagePreview" src="" style="max-width: 100px; border-radius: 8px; display: none; margin-bottom:1rem;">
+                    
+                    <button type="submit" class="action-btn">Save Branding</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Reply Modal -->
+    <div id="replyModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 style="color: #fff; margin-top:0;">Reply to Enquiry <span id="replyEnqId" style="color:#ffd700;"></span></h3>
+            <textarea id="replyText" rows="4" style="width:100%; padding: 0.75rem; border-radius:8px; border:1px solid #ffd700; background:#000; color:#fff;" placeholder="Type your reply to the resident..."></textarea>
+            <select id="replyStatus" style="width:100%; margin-top:1rem; padding:0.75rem; background:#000; color:#fff; border:1px solid #ffd700;">
+                <option value="In Progress">Move to In Progress</option>
+                <option value="Resolved">Mark as Resolved</option>
+            </select>
+            <div style="margin-top:2rem; display:flex; justify-content:space-between;">
+                <button class="action-btn" onclick="closeAdminModal()" style="background:transparent; border:1px solid #fff; color:#fff;">Cancel</button>
+                <button class="action-btn" onclick="submitReply()">Submit Reply</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentEnqId = null;
+
+        function renderAdmin() {
+            // Residents
+            const residents = JSON.parse(localStorage.getItem('mockResidents') || '[]');
+            const rtBody = document.querySelector('#residentTable tbody');
+            rtBody.innerHTML = '';
+            residents.forEach((r, idx) => {
+                rtBody.innerHTML += `
+                    <tr>
+                        <td>${r.name}</td>
+                        <td>${r.flat}</td>
+                        <td>${r.contact}</td>
+                        <td>${r.email}</td>
+                        <td><span class="status-chip ${r.status === 'Approved' ? 'status-resolved' : 'status-progress'}">${r.status}</span></td>
+                        <td>
+                            ${r.status !== 'Approved' ? `<button onclick="approveResident(${idx})" style="padding:0.5rem; background:#2ecc71; color:#000; border:none; border-radius:5px; cursor:pointer;">Approve</button>` : '✓'}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Enquiries
+            const enquiries = JSON.parse(localStorage.getItem('mockEnquiries') || '[]');
+            const eqBody = document.querySelector('#enquiryTable tbody');
+            eqBody.innerHTML = '';
+            enquiries.forEach(eq => {
+                let sClass = 'status-received';
+                if(eq.status === 'In Progress') sClass='status-progress';
+                if(eq.status === 'Resolved') sClass='status-resolved';
+
+                eqBody.innerHTML += `
+                    <tr>
+                        <td><strong>${eq.id}</strong><br><small style="color:#aaa;">${eq.message.substring(0, 20)}...</small></td>
+                        <td>${eq.name}</td>
+                        <td>${eq.category}</td>
+                        <td>${eq.date}</td>
+                        <td><span class="status-chip ${sClass}">${eq.status}</span></td>
+                        <td>
+                            <button onclick="openReplyModal('${eq.id}')" style="padding:0.5rem; background:#ffd700; color:#000; border:none; border-radius:5px; cursor:pointer;">Manage</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Offers
+            const offer = JSON.parse(localStorage.getItem('offerOfTheDay') || '{}');
+            document.getElementById('offerTitle').value = offer.title || '';
+            document.getElementById('offerDesc').value = offer.desc || '';
+            document.getElementById('offerActive').checked = !!offer.active;
+        }
+
+        function approveResident(index) {
+            let res = JSON.parse(localStorage.getItem('mockResidents'));
+            res[index].status = 'Approved';
+            localStorage.setItem('mockResidents', JSON.stringify(res));
+            renderAdmin();
+        }
+
+        function openReplyModal(id) {
+            currentEnqId = id;
+            document.getElementById('replyEnqId').innerText = id;
+            document.getElementById('replyModal').classList.add('active');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('replyModal').classList.remove('active');
+        }
+
+        function submitReply() {
+            const text = document.getElementById('replyText').value;
+            const status = document.getElementById('replyStatus').value;
+            let eqs = JSON.parse(localStorage.getItem('mockEnquiries'));
+            
+            let target = eqs.find(e => e.id === currentEnqId);
+            if(target) {
+                target.reply = text;
+                target.status = status;
+                localStorage.setItem('mockEnquiries', JSON.stringify(eqs));
+            }
+            closeAdminModal();
+            renderAdmin();
+        }
+
+        // Offer Submission
+        document.getElementById('offerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const offer = {
+                title: document.getElementById('offerTitle').value,
+                desc: document.getElementById('offerDesc').value,
+                active: document.getElementById('offerActive').checked
+            };
+            localStorage.setItem('offerOfTheDay', JSON.stringify(offer));
+            alert('Offer rules updated! Will be visible on Home page if active.');
+        });
+
+        // Branding Submission
+        document.getElementById('brandingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('societyName').value;
+            const imgFile = document.getElementById('societyImage').files[0];
+            
+            if (imgFile) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const branding = { name: name, image: event.target.result };
+                    localStorage.setItem('societyBranding', JSON.stringify(branding));
+                    alert('Society Branding saved! Check the Home page.');
+                };
+                reader.readAsDataURL(imgFile);
+            } else {
+                const existing = JSON.parse(localStorage.getItem('societyBranding') || '{}');
+                const branding = { name: name, image: existing.image || '' };
+                localStorage.setItem('societyBranding', JSON.stringify(branding));
+                alert('Society Name saved! Check the Home page.');
+            }
+        });
+
+        // Debug tool
+        function clearDb() {
+            localStorage.clear();
+            location.reload();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAdmin();
+            // Pre-fill branding fields
+            const storedBrand = JSON.parse(localStorage.getItem('societyBranding') || '{}');
+            if (storedBrand.name) document.getElementById('societyName').value = storedBrand.name;
+            if (storedBrand.image) {
+                const preview = document.getElementById('societyImagePreview');
+                preview.src = storedBrand.image;
+                preview.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

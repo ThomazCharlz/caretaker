@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flea Market - Care Taker</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        .badge-sell { background-color: #ffd700; color: #1a1a1a; }
+        .badge-donate { background-color: #4b0082; color: #ffffff; border: 1px solid #7851a9; }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Care<span>Taker</span></a>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="fleamarket.html" class="nav-link active">Flea Market</a></li>
+                <li><a href="contact.html" class="nav-link">Enquire</a></li>
+                <li><a href="login.html" class="nav-link nav-btn">Login / Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="animated-banner" style="min-height: 350px; height: 35vh;">
+        <div class="banner-content">
+            <h1 class="hero-brand" style="font-size: 4rem;">Flea Market</h1>
+            <p class="description">Buy, sell, or donate articles exclusively within your community.</p>
+            <button class="action-btn" onclick="document.getElementById('list-item-form').scrollIntoView();" style="margin-top: 2rem;">List an Item</button>
+        </div>
+    </div>
+
+    <!-- Items Grid -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Available Items</h2>
+            <p class="section-desc">Find great deals or free items from your neighbors.</p>
+        </div>
+        <div class="card-grid" id="flea-items-container">
+            <!-- Mock Items -->
+            <div class="feature-card">
+                <span class="badge badge-sell">For Sale: $45</span>
+                <i class="fas fa-couch card-icon"></i>
+                <h3 class="feature-title">Wooden Coffee Table</h3>
+                <p class="feature-desc">Gently used coffee table. Pick up from Flat 204.</p>
+                <button class="action-btn">Contact Seller</button>
+            </div>
+            <div class="feature-card">
+                <span class="badge badge-donate">Free / Donate</span>
+                <i class="fas fa-book card-icon"></i>
+                <h3 class="feature-title">Box of Novels</h3>
+                <p class="feature-desc">Assorted fiction books. Leaving them outside Flat 101.</p>
+                <button class="action-btn">Claim Item</button>
+            </div>
+            <div class="feature-card">
+                <span class="badge badge-sell">For Sale: $250</span>
+                <i class="fas fa-bicycle card-icon"></i>
+                <h3 class="feature-title">Mountain Bike</h3>
+                <p class="feature-desc">Barely used, moving out sale. Call Flat 505.</p>
+                <button class="action-btn">Contact Seller</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- List Item Form -->
+    <section class="section section-alt" id="list-item-form">
+        <div class="section-header">
+            <h2 class="section-title">List an Item</h2>
+            <p class="section-desc">Add your article to the Supabase database for others to see.</p>
+        </div>
+        <div class="card-grid" style="grid-template-columns: 1fr; max-width: 600px;">
+            <div class="feature-card" style="align-items: stretch; text-align: left;">
+                <form id="fleaForm" onsubmit="event.preventDefault(); alert('Saved to Supabase! (Mocked)');">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700;">Item Title</label>
+                        <input type="text" style="width: 100%; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color:#fff;" required>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700;">Description & Flat No.</label>
+                        <textarea rows="3" style="width: 100%; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color:#fff;" required></textarea>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700;">Listing Type</label>
+                        <select style="width: 100%; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color:#fff;">
+                            <option>For Sale (List Price in Description)</option>
+                            <option>Donate / Free</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="action-btn" style="width: 100%;">Post Item to Flea Market</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Care Taker | Realcare SoftTech Pvt.Ltd.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

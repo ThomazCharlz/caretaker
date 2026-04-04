@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Enquiry - Care Taker</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Care<span>Taker</span></a>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="fleamarket.html" class="nav-link">Flea Market</a></li>
+                <li><a href="contact.html" class="nav-link active">Enquire</a></li>
+                <li><a href="login.html" class="nav-link nav-btn">Login / Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="animated-banner" style="min-height: 300px; height: 30vh;">
+        <div class="banner-content">
+            <h1 class="hero-brand" style="font-size: 3.5rem;">Contact Us</h1>
+            <p class="description">We're here to assist you with all your apartment and personal needs.</p>
+        </div>
+    </div>
+
+    <section class="section" style="flex: 1;">
+        <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+            
+            <!-- Contact Info Card -->
+            <div class="feature-card" style="align-items: flex-start; text-align: left; background: rgba(75, 0, 130, 0.2);">
+                <i class="fas fa-address-card card-icon" style="margin-bottom: 1rem;"></i>
+                <h3 class="feature-title">Realcare SoftTech Pvt.Ltd.</h3>
+                
+                <div style="margin-top: 1rem; color: #ccc; line-height: 1.8;">
+                    <p><i class="fas fa-map-marker-alt" style="color: #ffd700; width: 20px;"></i> 
+                       SivaSakthi Complex, Bypass Junction,<br>
+                       <span style="margin-left: 24px;">Kazhakuttam-695582, Trivandrum.</span></p>
+                    <p><i class="fas fa-phone-alt" style="color: #ffd700; width: 20px;"></i> +91 8891646737</p>
+                    <p><i class="fab fa-whatsapp" style="color: #ffd700; width: 20px;"></i> +91 8590050409</p>
+                    <p><i class="fas fa-envelope" style="color: #ffd700; width: 20px;"></i> realcaresoftech@gmail.com</p>
+                    <p><i class="fas fa-globe" style="color: #ffd700; width: 20px;"></i> <a href="http://www.spectrumsspace.com" target="_blank" style="color: #ffd700; text-decoration: none;">www.spectrumsspace.com</a></p>
+                </div>
+            </div>
+
+            <!-- Enquiry Form Card -->
+            <div class="feature-card" style="align-items: stretch; text-align: left;">
+                <h3 class="feature-title" style="margin-bottom: 2rem;">Send an Enquiry</h3>
+                <form id="enquiryForm">
+                    <div style="margin-bottom: 1rem;">
+                        <input type="text" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color:#fff;" required>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <select style="width: 100%; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color:#fff;" required>
+                            <option value="">Select Service Category...</option>
+                            <option value="human_assistance">Human Assistance (Day Care/Patient/Cleaner)</option>
+                            <option value="events">Event Management</option>
+                            <option value="maintenance">Apartment Services (Plumbing/Electrician...)</option>
+                            <option value="other">Other Query</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <textarea rows="4" placeholder="How can we help you?" style="width: 100%; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color:#fff;" required></textarea>
+                    </div>
+                    <button type="submit" class="action-btn" style="width: 100%;">Submit Enquiry</button>
+                </form>
+            </div>
+            
+            <!-- Tracking Card -->
+            <div class="feature-card" style="align-items: stretch; text-align: left;">
+                <i class="fas fa-search-location card-icon" style="margin-bottom: 1rem;"></i>
+                <h3 class="feature-title">Track Enquiry</h3>
+                <p class="feature-desc" style="margin-bottom: 1.5rem;">Enter your ENQ Tracking ID below to see updates directly from our admin team.</p>
+                <form id="trackForm">
+                    <input type="text" placeholder="e.g. ENQ-1234" style="width: 100%; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color:#fff; text-transform: uppercase;" required>
+                    <button type="submit" class="action-btn" style="width: 100%;"><i class="fas fa-search"></i> Check Status</button>
+                </form>
+                <div id="trackResult"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Care Taker | Realcare SoftTech Pvt.Ltd.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

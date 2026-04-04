@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Taker - Your Apartment & Personal Needs Partner</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Care<span>Taker</span></a>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="fleamarket.html" class="nav-link">Flea Market</a></li>
+                <li><a href="contact.html" class="nav-link">Enquire</a></li>
+                <li><a href="login.html" class="nav-link nav-btn">Login / Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="animated-banner" id="heroBanner">
+        <div class="banner-content">
+            <img id="dynamic-society-img" src="" alt="Society Logo" style="display:none; max-width: 150px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.5); margin: 0 auto 1.5rem auto;">
+            <h1 class="hero-brand" id="dynamic-society-name">Care Taker</h1>
+            <h2 class="tagline" style="font-size: 2.5rem;" id="dynamic-society-subtitle">Simplifying Community Living</h2>
+            <p class="description">From daily groceries to human assistance, we manage it all. Experience smooth, secure, and hassle-free apartment living.</p>
+        </div>
+    </div>
+
+    <!-- MAIN WRAPPER -->
+    <div style="max-width: 1200px; margin: 0 auto; padding-top: 2rem;">
+        
+        <!-- Offer of the Day Injected Here -->
+        <div id="offer-container" class="offer-banner"></div>
+
+        <!-- Deliveries & Pickups -->
+        <section class="section" id="services" style="padding-top: 2rem;">
+            <div class="section-header">
+                <h2 class="section-title">Pickup & Drop</h2>
+                <p class="section-desc">Fast, secure deliveries right to your door. We handle all kinds of packages with care.</p>
+            </div>
+            <div class="card-grid">
+                <div class="feature-card">
+                    <i class="fas fa-gift card-icon"></i>
+                    <h3 class="feature-title">Gifts & Parcels</h3>
+                    <p class="feature-desc">Secure handling for all incoming and outgoing personal packages.</p>
+                    <button class="action-btn">Track Parcel</button>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-hamburger card-icon"></i>
+                    <h3 class="feature-title">Food Delivery</h3>
+                    <p class="feature-desc">Seamless entry for food delivery agents straight to your flat.</p>
+                    <button class="action-btn">Allow Entry</button>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tshirt card-icon"></i>
+                    <h3 class="feature-title">Clothing & Laundry</h3>
+                    <p class="feature-desc">Pickup and drop for your dry cleaning and shopping needs.</p>
+                    <button class="action-btn">Schedule</button>
+                </div>
+            </div>
+        </section>
+    </div> <!-- END WRAPPER -->
+
+    <!-- Grocery Shopping -->
+    <section class="section section-alt">
+        <div class="section-header">
+            <h2 class="section-title">Grocery Bazaar</h2>
+            <p class="section-desc">Everything available in a supermarket, delivered directly to your kitchen.</p>
+        </div>
+        <div class="card-grid">
+            <div class="feature-card">
+                <i class="fas fa-carrot card-icon"></i>
+                <h3 class="feature-title">Fresh Produce</h3>
+                <p class="feature-desc">Daily fresh vegetables and fruits sourced locally.</p>
+                <button class="action-btn">Shop Now</button>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-box card-icon"></i>
+                <h3 class="feature-title">Pantry Staples</h3>
+                <p class="feature-desc">Rice, wheat, spices, and all your monthly essentials.</p>
+                <button class="action-btn">Shop Now</button>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-pump-soap card-icon"></i>
+                <h3 class="feature-title">Household & Cleaning</h3>
+                <p class="feature-desc">Detergents, sanitizers, and household items.</p>
+                <button class="action-btn">Shop Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apartment Services -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Apartment Services</h2>
+            <p class="section-desc">Verified professionals for all your maintenance and transit needs.</p>
+        </div>
+        <div class="card-grid">
+            <div class="feature-card">
+                <i class="fas fa-wrench card-icon"></i>
+                <h3 class="feature-title">Plumber & Electrician</h3>
+                <p class="feature-desc">Quick fixes and major repairs by certified experts.</p>
+                <button class="action-btn">Book Now</button>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-paint-roller card-icon"></i>
+                <h3 class="feature-title">Painter, Mason & Carpenter</h3>
+                <p class="feature-desc">Renovate or fix your apartment with skilled laborers.</p>
+                <button class="action-btn">Enquire</button>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-car card-icon"></i>
+                <h3 class="feature-title">Driver on Call</h3>
+                <p class="feature-desc">Hire temporary drivers for your personal vehicle.</p>
+                <button class="action-btn">Book Driver</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Human Assistance (NEW) -->
+    <section class="section section-alt">
+        <div class="section-header">
+            <h2 class="section-title">Human Assistance</h2>
+            <p class="section-desc">Compassionate and reliable help for your family and home.</p>
+        </div>
+        <div class="card-grid">
+            <div class="feature-card">
+                <i class="fas fa-baby card-icon"></i>
+                <h3 class="feature-title">Day Care for Babies</h3>
+                <p class="feature-desc">Trusted nannies to watch over your little ones.</p>
+                <button class="action-btn">Enquire Now</button>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-user-nurse card-icon"></i>
+                <h3 class="feature-title">Patient & Old Age Care</h3>
+                <p class="feature-desc">Dedicated nursing and companionship for elders.</p>
+                <button class="action-btn">Enquire Now</button>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-stethoscope card-icon"></i>
+                <h3 class="feature-title">Doctor Service</h3>
+                <p class="feature-desc">On-call doctors for routine visits and emergencies.</p>
+                <button class="action-btn">Call Doctor</button>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-utensils card-icon"></i>
+                <h3 class="feature-title">Kitchen Servants</h3>
+                <p class="feature-desc">Experienced cooks for part-time or full-time needs.</p>
+                <button class="action-btn">Find a Cook</button>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-broom card-icon"></i>
+                <h3 class="feature-title">Cleaners (Full/Part Time)</h3>
+                <p class="feature-desc">Keep your apartment spotless with reliable maids.</p>
+                <button class="action-btn">Book Cleaning</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Management & Visitor Pass -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Community & Security</h2>
+            <p class="section-desc">Celebrate safely while we manage the access.</p>
+        </div>
+        <div class="card-grid">
+            <div class="feature-card">
+                <i class="fas fa-birthday-cake card-icon"></i>
+                <h3 class="feature-title">Event Management</h3>
+                <p class="feature-desc">From birthdays to grand functions, we organize it all in the clubhouse.</p>
+                <button class="action-btn">Plan Event</button>
+            </div>
+            <div class="feature-card" style="border-color: #ffd700; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);">
+                <i class="fas fa-id-badge card-icon"></i>
+                <h3 class="feature-title">Visitor Gate Pass</h3>
+                <p class="feature-desc">Security requests OTP. You approve on the app, and the visitor enters seamlessly.</p>
+                <button class="action-btn">Generate OTP Pass</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Care Taker | Realcare SoftTech Pvt.Ltd.</p>
+            <p style="margin-top: 10px;"><a href="contact.html" style="color: #ffd700; text-decoration: none;">Contact Us</a></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

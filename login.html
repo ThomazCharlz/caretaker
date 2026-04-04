@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register - Care Taker</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Care<span>Taker</span></a>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="fleamarket.html" class="nav-link">Flea Market</a></li>
+                <li><a href="contact.html" class="nav-link">Enquire</a></li>
+                <li><a href="login.html" class="nav-link active nav-btn">Login / Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Login/Register Form -->
+    <section class="section" style="min-height: 80vh; display: flex; align-items: center;">
+        <div class="card-grid" style="grid-template-columns: 1fr; max-width: 500px; width: 100%;">
+            <div class="feature-card" style="align-items: stretch; text-align: left; background: rgba(20,20,20,0.8);">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <i class="fas fa-user-circle" style="font-size: 4rem; color: #ffd700; margin-bottom: 1rem;"></i>
+                    <h2 style="color: #fff; margin:0;">Resident Access</h2>
+                    <p style="color: #aaa; margin-top:0.5rem;">Identify yourself to access services</p>
+                </div>
+                
+                <form id="loginForm" onsubmit="event.preventDefault(); alert('User Data sent to Supabase! (Mocked)'); window.location.href='index.html';">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700; font-size: 0.9rem; font-weight: bold;">Full Name</label>
+                        <input type="text" placeholder="John Doe" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color:#fff; outline:none;" required>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700; font-size: 0.9rem; font-weight: bold;">Flat Number</label>
+                        <input type="text" placeholder="e.g. A-402, Block C" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color:#fff; outline:none;" required>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700; font-size: 0.9rem; font-weight: bold;">Contact Number</label>
+                        <input type="tel" placeholder="+91 9876543210" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color:#fff; outline:none;" required>
+                    </div>
+                    <div style="margin-bottom: 2rem;">
+                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700; font-size: 0.9rem; font-weight: bold;">Email ID</label>
+                        <input type="email" placeholder="john@example.com" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color:#fff; outline:none;" required>
+                    </div>
+                    
+                    <button type="submit" class="action-btn" style="width: 100%; padding: 1rem; font-size: 1.1rem;">Login / Access</button>
+                    
+                    <p style="text-align: center; color: #888; font-size: 0.8rem; margin-top: 1.5rem;">
+                        By continuing, you agree to Care Taker's Terms of Service and Privacy Policy.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
