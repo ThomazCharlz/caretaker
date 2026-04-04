@@ -40,25 +40,20 @@
                     <p style="color: #aaa; margin-top:0.5rem;">Identify yourself to access services</p>
                 </div>
                 
-                <form id="loginForm" onsubmit="event.preventDefault(); alert('User Data sent to Supabase! (Mocked)'); window.location.href='index.html';">
+                <form id="loginForm">
                     <div style="margin-bottom: 1.5rem;">
-                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700; font-size: 0.9rem; font-weight: bold;">Full Name</label>
-                        <input type="text" placeholder="John Doe" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color:#fff; outline:none;" required>
-                    </div>
-                    <div style="margin-bottom: 1.5rem;">
-                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700; font-size: 0.9rem; font-weight: bold;">Flat Number</label>
-                        <input type="text" placeholder="e.g. A-402, Block C" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color:#fff; outline:none;" required>
-                    </div>
-                    <div style="margin-bottom: 1.5rem;">
-                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700; font-size: 0.9rem; font-weight: bold;">Contact Number</label>
-                        <input type="tel" placeholder="+91 9876543210" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color:#fff; outline:none;" required>
+                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700; font-size: 0.9rem; font-weight: bold;">Email ID</label>
+                        <input type="email" id="authEmail" placeholder="john@example.com" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color:#fff; outline:none;" required>
                     </div>
                     <div style="margin-bottom: 2rem;">
-                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700; font-size: 0.9rem; font-weight: bold;">Email ID</label>
-                        <input type="email" placeholder="john@example.com" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color:#fff; outline:none;" required>
+                        <label style="display:block; margin-bottom: 0.5rem; color:#ffd700; font-size: 0.9rem; font-weight: bold;">Password</label>
+                        <input type="password" id="authPassword" placeholder="******" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color:#fff; outline:none;" required>
                     </div>
                     
-                    <button type="submit" class="action-btn" style="width: 100%; padding: 1rem; font-size: 1.1rem;">Login / Access</button>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="button" id="loginBtn" class="action-btn" style="flex: 1; padding: 1rem; font-size: 1.1rem;">Login</button>
+                        <button type="button" id="regBtn" class="action-btn" style="flex: 1; padding: 1rem; font-size: 1.1rem; background: transparent; border: 2px solid #ffd700;">Register</button>
+                    </div>
                     
                     <p style="text-align: center; color: #888; font-size: 0.8rem; margin-top: 1.5rem;">
                         By continuing, you agree to Care Taker's Terms of Service and Privacy Policy.

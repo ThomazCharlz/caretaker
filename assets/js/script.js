@@ -1,10 +1,9 @@
-// Initialize mock data if not exists
-if (!localStorage.getItem('mockEnquiries')) {
-    localStorage.setItem('mockEnquiries', JSON.stringify([]));
-}
-if (!localStorage.getItem('mockResidents')) {
-    localStorage.setItem('mockResidents', JSON.stringify([]));
-}
+// Supabase Initialization
+const SUPABASE_URL = 'https://rdgzwqeiwckttgraloqb.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_koeZUI_gUSWs0mM-wuwoiQ_Tr3oIyn2';
+const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+
+// Initialize mock data for ui generic banners if not exists
 if (!localStorage.getItem('offerOfTheDay')) {
     localStorage.setItem('offerOfTheDay', JSON.stringify({ active: false, title: '', desc: '' }));
 }
@@ -50,80 +49,116 @@ document.addEventListener('DOMContentLoaded', () => {
     // Intercept Contact Enquiry Form
     const enquiryForm = document.getElementById('enquiryForm');
     if (enquiryForm) {
-        enquiryForm.addEventListener('submit', (e) => {
+        enquiryForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const name = e.target[0].value;
             const category = e.target[1].value;
             const message = e.target[2].value;
-            
-            // Generate Tracking ID (e.g. ENQ-5912)
             const trackingId = 'ENQ-' + Math.floor(1000 + Math.random() * 9000);
             
-            const enquiries = JSON.parse(localStorage.getItem('mockEnquiries'));
-            enquiries.push({
-                id: trackingId,
-                name,
-                category,
-                message,
-                status: 'Received',
-                date: new Date().toLocaleDateString()
-            });
-            localStorage.setItem('mockEnquiries', JSON.stringify(enquiries));
-            
-            // Show Custom Modal instead of alert
-            showTrackingModal(trackingId);
-            enquiryForm.reset();
+            try {
+                if(!supabase) throw new Error("Supabase is not initialized.");
+                
+                const { error } = await supabase.from('enquiries').insert([{
+                    id: trackingId,
+                    name: name,
+                    category: category,
+                    message: message,
+                    status: 'Received',
+                    created_at: new Date().toISOString()
+                }]);
+                
+                if (error) throw error;
+                
+                showTrackingModal(trackingId);
+                enquiryForm.reset();
+            } catch (err) {
+                alert('Error submitting enquiry: ' + err.message + '\nMake sure the "enquiries" table exists in your Supabase project.');
+            }
         });
     }
 
     // Intercept Tracking Form
     const trackForm = document.getElementById('trackForm');
     if (trackForm) {
-        trackForm.addEventListener('submit', (e) => {
+        trackForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const trackId = e.target[0].value.trim().toUpperCase();
             const resultDiv = document.getElementById('trackResult');
             
-            const enquiries = JSON.parse(localStorage.getItem('mockEnquiries'));
-            const found = enquiries.find(eq => eq.id === trackId);
-            
-            if (found) {
-                let color = '#fff';
-                if (found.status === 'In Progress') color = '#ffd700';
-                if (found.status === 'Resolved') color = '#2ecc71';
+            try {
+                if(!supabase) throw new Error("Supabase is not initialized.");
                 
-                resultDiv.innerHTML = `
-                    <div style="background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid ${color};">
-                        <strong style="color: #ffd700;">Status:</strong> <span style="color:${color}; font-weight:bold;">${found.status}</span><br>
-                        <strong style="color: #ffd700;">Category:</strong> ${found.category}<br>
-                        <strong style="color: #ffd700;">Admin Reply:</strong> ${found.reply || 'Pending review...'}
-                    </div>
-                `;
-            } else {
-                resultDiv.innerHTML = `<p style="color: #ff6b6b; margin-top: 1rem;">Tracking ID not found.</p>`;
+                const { data, error } = await supabase.from('enquiries').select('*').eq('id', trackId).single();
+                
+                if (error) throw error;
+                
+                if (data) {
+                    let color = '#fff';
+                    if (data.status === 'In Progress') color = '#ffd700';
+                    if (data.status === 'Resolved') color = '#2ecc71';
+                    
+                    resultDiv.innerHTML = `
+                        <div style="background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid ${color};">
+                            <strong style="color: #ffd700;">Status:</strong> <span style="color:${color}; font-weight:bold;">${data.status}</span><br>
+                            <strong style="color: #ffd700;">Category:</strong> ${data.category}<br>
+                            <strong style="color: #ffd700;">Admin Reply:</strong> ${data.reply || 'Pending review...'}
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                resultDiv.innerHTML = `<p style="color: #ff6b6b; margin-top: 1rem;">Tracking ID not found or error: ${err.message}</p>`;
             }
         });
     }
 
-    // Intercept Resident Login Form
-    const loginForm = document.getElementById('loginForm');
-    if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const residents = JSON.parse(localStorage.getItem('mockResidents'));
+    // Supabase Auth Integration
+    const loginBtn = document.getElementById('loginBtn');
+    const regBtn = document.getElementById('regBtn');
+    
+    if (loginBtn) {
+        loginBtn.addEventListener('click', async () => {
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+            if(!email || !password) return alert('Please enter both email and password.');
             
-            residents.push({
-                name: e.target[0].value,
-                flat: e.target[1].value,
-                contact: e.target[2].value,
-                email: e.target[3].value,
-                status: 'Pending Approval'
-            });
+            try {
+                if(!supabase) throw new Error("Supabase is not initialized.");
+                
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+                
+                if (error) throw error;
+                alert('Login successful! Redirecting...');
+                window.location.href = 'index.html';
+            } catch (err) {
+                alert('Login Failed: ' + err.message);
+            }
+        });
+    }
+
+    if (regBtn) {
+        regBtn.addEventListener('click', async () => {
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+            if(!email || !password) return alert('Please enter both email and password.');
             
-            localStorage.setItem('mockResidents', JSON.stringify(residents));
-            alert('Registration details sent to Admin for approval!');
-            window.location.href = 'index.html';
+            try {
+                if(!supabase) throw new Error("Supabase is not initialized.");
+                
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password
+                });
+                
+                if (error) throw error;
+                alert('Registration successful! Check your email or try logging in.');
+            } catch (err) {
+                alert('Registration Failed: ' + err.message);
+            }
         });
     }
 });
