@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Scrap - Care Taker</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .scrap-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .upload-card {
+            border: 2px dashed rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-card:hover {
+            background: rgba(255, 215, 0, 0.05);
+            border-color: #ffd700;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        #success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(34, 139, 34, 0.2);
+            border-radius: 15px;
+            border: 1px solid #228b22;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Care<span>Taker</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html#services" class="nav-link">Back to Services</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="animated-banner" style="min-height: 250px; height: 25vh;">
+        <div class="banner-content">
+            <h1 class="hero-brand">Sell Your Scrap</h1>
+            <p class="description">Convert your household waste into cash with zero hassle.</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="scrap-container">
+            <div id="scrap-form-wrapper">
+                <h3>Submit Scrap Details</h3>
+                <p style="margin-bottom: 2rem; color: rgba(255,255,255,0.7);">Upload photos and describe what you want to sell.</p>
+
+                <div class="upload-card" onclick="document.getElementById('scrap-photos').click();">
+                    <img id="preview-img" src="assets/img/categories/scrap_items.png" alt="Scrap Preview" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                    <p><i class="fas fa-camera"></i> Click to Upload Scrap Photos</p>
+                    <input type="file" id="scrap-photos" style="display:none;" onchange="handleScrapPreview(this)">
+                </div>
+
+                <form id="scrap-form" onsubmit="handleScrapSubmit(event)">
+                    <div class="input-group">
+                        <label>Scrap Quantity / Description</label>
+                        <textarea id="quantity" rows="3" placeholder="e.g. 10kg Old Newspapers, 5kg Cardboard, 2 Iron chairs..." required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Expected Price (₹)</label>
+                        <input type="number" id="expected-price" placeholder="Enter your desired price..." required>
+                    </div>
+                    <button type="submit" class="action-btn" style="width: 100%;">Send Pickup Request</button>
+                </form>
+            </div>
+
+            <div id="success-message">
+                <i class="fas fa-check-circle" style="font-size: 3rem; color: #4cd137; margin-bottom: 1rem;"></i>
+                <h2>Request Sent!</h2>
+                <p style="margin: 1rem 0;">Our agent will contact you shortly to confirm the weight and price.</p>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                    <strong>Tracking ID:</strong> SC-${Math.random().toString(36).substr(2, 6).toUpperCase()}
+                </div>
+                <button class="action-btn" style="margin-top: 2rem;" onclick="window.location.href='index.html'">Back to Home</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Care Taker | Realcare SoftTech Pvt.Ltd.</p>
+        </div>
+    </footer>
+
+    <script>
+        function handleScrapPreview(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview-img').src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function handleScrapSubmit(e) {
+            e.preventDefault();
+            document.getElementById('scrap-form-wrapper').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

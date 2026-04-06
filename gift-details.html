@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Selection - Care Taker</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gift-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .suggestion-item:hover {
+            transform: scale(1.02);
+        }
+
+        .suggestion-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        #tracking-display {
+            display: none;
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(34, 139, 34, 0.2);
+            border: 1px solid #228b22;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Care<span>Taker</span></a>
+            <ul class="nav-links">
+                <li><a href="parcel.html" class="nav-link">Back to Categories</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section" style="padding-top: 5rem;">
+        <div class="section-header">
+            <h2 class="section-title" id="gift-type-title">Loading...</h2>
+            <p class="section-desc">Recommended items for this occasion.</p>
+        </div>
+
+        <div class="gift-container">
+            <div id="suggestions-list">
+                <!-- Suggestions will be injected here -->
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 2rem 0;">
+
+            <form id="order-form" onsubmit="handleOrder(event)">
+                <div class="input-group">
+                    <label for="budget">Set your budget (₹)</label>
+                    <input type="number" id="budget" placeholder="Enter amount..." required>
+                </div>
+                <div class="input-group">
+                    <label for="address">Recipient Delivery Address</label>
+                    <textarea id="address" rows="3" placeholder="Enter full delivery address..." required></textarea>
+                </div>
+                <button type="submit" class="action-btn" style="width: 100%;">Place Gift Order</button>
+            </form>
+
+            <div id="tracking-display">
+                <h3 style="color: #4cd137;"><i class="fas fa-check-circle"></i> Order Placed Successfully!</h3>
+                <p style="margin: 1rem 0;">A confirmation message has been sent to your registered number.</p>
+                <div style="padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; display: inline-block;">
+                    <strong>Tracking ID:</strong> <span id="tracking-id" style="color: #ffd700; font-family: monospace; font-size: 1.2rem;">CT-000000</span>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">You can track this service in your profile.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Care Taker | Realcare SoftTech Pvt.Ltd.</p>
+        </div>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get('type') || 'birthday';
+
+        const giftData = {
+            'birthday': {
+                title: 'Birthday Gift Suggestions',
+                suggestions: [
+                    { name: 'Gourmet Chocolate Box', descPath: 'Premium assortment of dark and milk chocolates.', img: 'assets/img/categories/birthday_gift.png' },
+                    { name: 'Customized Photo Mug', descPath: 'High-quality ceramic mug with your custom photo.', img: 'https://images.unsplash.com/photo-1543157145-f78c636d0231?auto=format&fit=crop&w=150' },
+                    { name: 'Soft Teddy Bear', descPath: 'Adorable and huggable 12-inch teddy bear.', img: 'https://images.unsplash.com/photo-1559447271-6239bdb76c02?auto=format&fit=crop&w=150' }
+                ]
+            },
+            'marriage': {
+                title: 'Marriage Gift Suggestions',
+                suggestions: [
+                    { name: 'Crystal Vase', descPath: 'Elegant hand-cut crystal vase for home decor.', img: 'assets/img/categories/marriage_gift.png' },
+                    { name: 'Luxury Bedding Set', descPath: '1000 thread count Egyptian cotton linen set.', img: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=150' },
+                    { name: 'Couple Watch Set', descPath: 'Matching formal watches for the bride and groom.', img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=150' }
+                ]
+            },
+            'housewarming': {
+                title: 'Housewarming Gift Suggestions',
+                suggestions: [
+                    { name: 'Smart Aroma Diffuser', descPath: 'App-controlled ultrasonic essential oil diffuser.', img: 'assets/img/categories/housewarming_gift.png' },
+                    { name: 'Decorative Wall Clock', descPath: 'Modern minimalist large wall clock.', img: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&w=150' },
+                    { name: 'Indoor Plant Set', descPath: 'Set of 3 air-purifying low maintenance plants.', img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=150' }
+                ]
+            },
+            'special-event': {
+                title: 'Special Event Gift Suggestions',
+                suggestions: [
+                    { name: 'Exclusive Wine Hamper', descPath: 'Curated selection of premium wines and appetizers.', img: 'assets/img/categories/special_event_gift.png' },
+                    { name: 'Handcrafted Leather Journal', descPath: 'Premium full-grain leather bound diary.', img: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&w=150' },
+                    { name: 'Luxury Spa Voucher', descPath: 'All-inclusive day spa and wellness experience.', img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=150' }
+                ]
+            }
+        };
+
+        const currentGift = giftData[type] || giftData['birthday'];
+        document.title = `${currentGift.title} - Care Taker`;
+        document.getElementById('gift-type-title').innerText = currentGift.title;
+
+        const list = document.getElementById('suggestions-list');
+        currentGift.suggestions.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'suggestion-item';
+            div.innerHTML = `
+                <img src="${item.img}" class="suggestion-img" alt="${item.name}">
+                <div>
+                    <h4 style="color: #ffd700; margin-bottom: 0.25rem;">${item.name}</h4>
+                    <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">${item.descPath}</p>
+                </div>
+            `;
+            list.appendChild(div);
+        });
+
+        function handleOrder(e) {
+            e.preventDefault();
+            const form = document.getElementById('order-form');
+            const display = document.getElementById('tracking-display');
+            const trackingIdText = document.getElementById('tracking-id');
+
+            // Generate a fake tracking ID
+            const randomId = 'CT-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+            trackingIdText.innerText = randomId;
+
+            form.style.display = 'none';
+            display.style.display = 'block';
+            display.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>

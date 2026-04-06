@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gifts & Parcels - Care Taker</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Care<span>Taker</span></a>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="fleamarket.html" class="nav-link">Flea Market</a></li>
+                <li><a href="contact.html" class="nav-link">Enquire</a></li>
+                <li><a href="login.html" class="nav-link nav-btn">Login / Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="animated-banner" style="min-height: 300px; height: 30vh;">
+        <div class="banner-content">
+            <h1 class="hero-brand">Gifts & Parcels</h1>
+            <p class="description">Select a gift category to view suggestions and place an order.</p>
+        </div>
+    </div>
+
+    <!-- Gift Categories -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Select Occasion</h2>
+            <p class="section-desc">Choose the type of gift you want to send or receive.</p>
+        </div>
+        <div class="card-grid">
+            <div class="feature-card" style="padding: 0; overflow: hidden;">
+                <img src="assets/img/categories/birthday_gift.png" alt="Birthday Gift" style="width: 100%; height: 200px; object-fit: cover;">
+                <div style="padding: 1.5rem;">
+                    <h3 class="feature-title">Birthday Gift</h3>
+                    <p class="feature-desc">Make someone's day special with a curated birthday surprise.</p>
+                    <button class="action-btn" onclick="window.location.href='gift-details.html?type=birthday'" style="width: 100%;">Choose Gift</button>
+                    <button class="action-btn" style="width: 100%; margin-top: 0.5rem; background: rgba(255,215,0,0.1); color: #ffd700;" onclick="document.getElementById('fileInput').click();">Change Photo</button>
+                </div>
+            </div>
+            <div class="feature-card" style="padding: 0; overflow: hidden;">
+                <img src="assets/img/categories/marriage_gift.png" alt="Marriage Gift" style="width: 100%; height: 200px; object-fit: cover;">
+                <div style="padding: 1.5rem;">
+                    <h3 class="feature-title">Marriage Gift</h3>
+                    <p class="feature-desc">Elegant gifts for the perfect wedding celebration.</p>
+                    <button class="action-btn" onclick="window.location.href='gift-details.html?type=marriage'" style="width: 100%;">Choose Gift</button>
+                    <button class="action-btn" style="width: 100%; margin-top: 0.5rem; background: rgba(255,215,0,0.1); color: #ffd700;" onclick="document.getElementById('fileInput').click();">Change Photo</button>
+                </div>
+            </div>
+            <div class="feature-card" style="padding: 0; overflow: hidden;">
+                <img src="assets/img/categories/housewarming_gift.png" alt="Housewarming Gift" style="width: 100%; height: 200px; object-fit: cover;">
+                <div style="padding: 1.5rem;">
+                    <h3 class="feature-title">Housewarming Gift</h3>
+                    <p class="feature-desc">Beautiful items to make a new house feel like home.</p>
+                    <button class="action-btn" onclick="window.location.href='gift-details.html?type=housewarming'" style="width: 100%;">Choose Gift</button>
+                    <button class="action-btn" style="width: 100%; margin-top: 0.5rem; background: rgba(255,215,0,0.1); color: #ffd700;" onclick="document.getElementById('fileInput').click();">Change Photo</button>
+                </div>
+            </div>
+            <div class="feature-card" style="padding: 0; overflow: hidden;">
+                <img src="assets/img/categories/special_event_gift.png" alt="Special Event Gift" style="width: 100%; height: 200px; object-fit: cover;">
+                <div style="padding: 1.5rem;">
+                    <h3 class="feature-title">Special Event Gift</h3>
+                    <p class="feature-desc">Luxury hampers and gifts for any significant milestone.</p>
+                    <button class="action-btn" onclick="window.location.href='gift-details.html?type=special-event'" style="width: 100%;">Choose Gift</button>
+                    <button class="action-btn" style="width: 100%; margin-top: 0.5rem; background: rgba(255,215,0,0.1); color: #ffd700;" onclick="document.getElementById('fileInput').click();">Change Photo</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden File Input for "Change Photo" functionality -->
+    <input type="file" id="fileInput" style="display: none;" onchange="alert('In a real app, this would upload the photo to Supabase storage. Previewing image...');">
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Care Taker | Realcare SoftTech Pvt.Ltd.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

@@ -54,36 +54,38 @@
     </div>
 
     <!-- Items Grid -->
-    <section class="section">
-        <div class="section-header">
-            <h2 class="section-title">Available Items</h2>
-            <p class="section-desc">Find great deals or free items from your neighbors.</p>
+        <div class="card-grid" id="flea-categories-container">
+            <!-- Categorized Cards -->
+            <div class="feature-card" style="padding: 0; overflow: hidden; height: auto;">
+                <img src="assets/img/categories/flea_household.png" alt="Household Items" style="width: 100%; height: 200px; object-fit: cover;">
+                <div style="padding: 1.5rem;">
+                    <h3 class="feature-title">Household Items</h3>
+                    <p class="feature-desc">Buy or sell used furniture, electronics, and kitchenware within the society.</p>
+                    <button class="action-btn" onclick="window.location.href='flea-household.html'" style="width: 100%;">Explore Items</button>
+                    <button class="action-btn" style="width: 100%; margin-top: 0.5rem; background: rgba(255,215,0,0.1); color: #ffd700;" onclick="document.getElementById('fileInput').click();">Change Photo</button>
+                </div>
+            </div>
+            <div class="feature-card" style="padding: 0; overflow: hidden; height: auto;">
+                <img src="assets/img/categories/flea_donate.png" alt="Donate / Free" style="width: 100%; height: 200px; object-fit: cover;">
+                <div style="padding: 1.5rem;">
+                    <h3 class="feature-title">Donate / Free</h3>
+                    <p class="feature-desc">Give away your well-maintained furniture, dresses, and books to neighbors.</p>
+                    <button class="action-btn" onclick="window.location.href='flea-donate.html'" style="width: 100%;">View Donations</button>
+                    <button class="action-btn" style="width: 100%; margin-top: 0.5rem; background: rgba(255,215,0,0.1); color: #ffd700;" onclick="document.getElementById('fileInput').click();">Change Photo</button>
+                </div>
+            </div>
+            <div class="feature-card" style="padding: 0; overflow: hidden; height: auto;">
+                <i class="fas fa-store card-icon" style="height: 200px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); margin: 0;"></i>
+                <div style="padding: 1.5rem;">
+                    <h3 class="feature-title">General Market</h3>
+                    <p class="feature-desc">Browse miscellaneous items for sale from fellow residents.</p>
+                    <button class="action-btn" onclick="window.location.href='flea-market.html'" style="width: 100%;">Enter Market</button>
+                    <button class="action-btn" style="width: 100%; margin-top: 0.5rem; background: rgba(255,215,0,0.1); color: #ffd700;" onclick="document.getElementById('fileInput').click();">Change Photo</button>
+                </div>
+            </div>
         </div>
-        <div class="card-grid" id="flea-items-container">
-            <!-- Mock Items -->
-            <div class="feature-card">
-                <span class="badge badge-sell">For Sale: $45</span>
-                <i class="fas fa-couch card-icon"></i>
-                <h3 class="feature-title">Wooden Coffee Table</h3>
-                <p class="feature-desc">Gently used coffee table. Pick up from Flat 204.</p>
-                <button class="action-btn">Contact Seller</button>
-            </div>
-            <div class="feature-card">
-                <span class="badge badge-donate">Free / Donate</span>
-                <i class="fas fa-book card-icon"></i>
-                <h3 class="feature-title">Box of Novels</h3>
-                <p class="feature-desc">Assorted fiction books. Leaving them outside Flat 101.</p>
-                <button class="action-btn">Claim Item</button>
-            </div>
-            <div class="feature-card">
-                <span class="badge badge-sell">For Sale: $250</span>
-                <i class="fas fa-bicycle card-icon"></i>
-                <h3 class="feature-title">Mountain Bike</h3>
-                <p class="feature-desc">Barely used, moving out sale. Call Flat 505.</p>
-                <button class="action-btn">Contact Seller</button>
-            </div>
-        </div>
-    </section>
+        <!-- Hidden File Input for "Change Photo" functionality -->
+        <input type="file" id="fileInput" style="display: none;" onchange="alert('In a real app, this would upload the photo to Supabase storage. Previewing image...');">
 
     <!-- List Item Form -->
     <section class="section section-alt" id="list-item-form">
