@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantry Staples - Care Taker</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .price-tag {
+            color: #ffd700;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Care<span>Taker</span></a>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="fleamarket.html" class="nav-link">Flea Market</a></li>
+                <li><a href="contact.html" class="nav-link">Enquire</a></li>
+                <li><a href="login.html" class="nav-link nav-btn">Login / Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div style="text-align: center; padding: 6rem 2rem 2rem 2rem;">
+        <h1 style="color: #ffd700; font-size: 3rem; margin-bottom: 1rem;">Pantry Staples</h1>
+        <p style="color: #aaa; font-size: 1.2rem; max-width: 600px; margin: 0 auto;">Stock up your kitchen with high-quality grains, organic spices, and pure essentials required for everyday cooking.</p>
+    </div>
+
+    <!-- Product Grid -->
+    <section class="section" style="padding-top: 0;">
+        <div class="card-grid">
+            
+            <!-- Basmati Rice -->
+            <div class="feature-card">
+                <img src="assets/img/pantry/basmati_rice.png" alt="Basmati Rice" class="product-img">
+                <h3 class="feature-title">Premium Basmati Rice</h3>
+                <p class="feature-desc">Extra long grain aged Basmati rice.</p>
+                <div class="price-tag">₹160 <span style="font-size:0.9rem; color:#888; font-weight:normal;">/ 1Kg</span></div>
+                <button class="action-btn" onclick="orderProduct('Basmati Rice', '1kg', 160)" style="width: 100%;">Order Now</button>
+            </div>
+
+            <!-- Wheat Flour -->
+            <div class="feature-card">
+                <img src="assets/img/pantry/wheat_flour.png" alt="Wheat Flour" class="product-img">
+                <h3 class="feature-title">Whole Wheat Atta</h3>
+                <p class="feature-desc">Finely ground 100% whole wheat chakki atta.</p>
+                <div class="price-tag">₹60 <span style="font-size:0.9rem; color:#888; font-weight:normal;">/ 1Kg</span></div>
+                <button class="action-btn" onclick="orderProduct('Whole Wheat Atta', '1kg', 60)" style="width: 100%;">Order Now</button>
+            </div>
+
+            <!-- Toor Dal -->
+            <div class="feature-card">
+                <img src="assets/img/pantry/toor_dal.png" alt="Toor Dal" class="product-img">
+                <h3 class="feature-title">Toor Dal (Lentils)</h3>
+                <p class="feature-desc">Unpolished premium quality pigeon peas.</p>
+                <div class="price-tag">₹150 <span style="font-size:0.9rem; color:#888; font-weight:normal;">/ 1Kg</span></div>
+                <button class="action-btn" onclick="orderProduct('Toor Dal', '1kg', 150)" style="width: 100%;">Order Now</button>
+            </div>
+
+            <!-- Sunflower Oil -->
+            <div class="feature-card">
+                <img src="assets/img/pantry/sunflower_oil.png" alt="Sunflower Oil" class="product-img">
+                <h3 class="feature-title">Refined Sunflower Oil</h3>
+                <p class="feature-desc">Light and healthy refined sunflower oil.</p>
+                <div class="price-tag">₹125 <span style="font-size:0.9rem; color:#888; font-weight:normal;">/ 1 Ltr</span></div>
+                <button class="action-btn" onclick="orderProduct('Sunflower Oil', '1 Ltr', 125)" style="width: 100%;">Order Now</button>
+            </div>
+
+            <!-- Sugar -->
+            <div class="feature-card">
+                <img src="assets/img/pantry/sugar.png" alt="Sugar" class="product-img">
+                <h3 class="feature-title">Refined White Sugar</h3>
+                <p class="feature-desc">Pure, sparkling crystal white sugar.</p>
+                <div class="price-tag">₹55 <span style="font-size:0.9rem; color:#888; font-weight:normal;">/ 1Kg</span></div>
+                <button class="action-btn" onclick="orderProduct('White Sugar', '1kg', 55)" style="width: 100%;">Order Now</button>
+            </div>
+
+            <!-- Crystal Salt -->
+            <div class="feature-card">
+                <img src="assets/img/pantry/crystal_salt.png" alt="Crystal Salt" class="product-img">
+                <h3 class="feature-title">Crystal Sea Salt</h3>
+                <p class="feature-desc">Iodized coarse crystal sea salt.</p>
+                <div class="price-tag">₹25 <span style="font-size:0.9rem; color:#888; font-weight:normal;">/ 1Kg</span></div>
+                <button class="action-btn" onclick="orderProduct('Crystal Salt', '1kg', 25)" style="width: 100%;">Order Now</button>
+            </div>
+            
+            <!-- Spices Box -->
+            <div class="feature-card">
+                <img src="assets/img/pantry/spices_box.png" alt="Spices" class="product-img">
+                <h3 class="feature-title">Indian Spices Kit</h3>
+                <p class="feature-desc">Combo of Turmeric, Chilli, Coriander & Cumin.</p>
+                <div class="price-tag">₹240 <span style="font-size:0.9rem; color:#888; font-weight:normal;">/ 500g Combo</span></div>
+                <button class="action-btn" onclick="orderProduct('Spices Kit', '500g Combo', 240)" style="width: 100%;">Order Now</button>
+            </div>
+
+            <!-- Tea Powder -->
+            <div class="feature-card">
+                <img src="assets/img/pantry/tea_powder.png" alt="Tea Powder" class="product-img">
+                <h3 class="feature-title">Premium Assam Tea</h3>
+                <p class="feature-desc">Strong and rich loose leaf black tea.</p>
+                <div class="price-tag">₹140 <span style="font-size:0.9rem; color:#888; font-weight:normal;">/ 250g</span></div>
+                <button class="action-btn" onclick="orderProduct('Assam Tea Powder', '250g', 140)" style="width: 100%;">Order Now</button>
+            </div>
+
+            <!-- Filter Coffee -->
+            <div class="feature-card">
+                <img src="assets/img/pantry/coffee_powder.png" alt="Filter Coffee" class="product-img">
+                <h3 class="feature-title">Filter Coffee Powder</h3>
+                <p class="feature-desc">Freshly roasted 80/20 blend Filter Coffee.</p>
+                <div class="price-tag">₹180 <span style="font-size:0.9rem; color:#888; font-weight:normal;">/ 250g</span></div>
+                <button class="action-btn" onclick="orderProduct('Filter Coffee', '250g', 180)" style="width: 100%;">Order Now</button>
+            </div>
+
+            <!-- Ghee -->
+            <div class="feature-card">
+                <img src="assets/img/pantry/ghee.png" alt="Ghee" class="product-img">
+                <h3 class="feature-title">Pure Cow Ghee</h3>
+                <p class="feature-desc">Aromatic traditional Indian clarified butter.</p>
+                <div class="price-tag">₹350 <span style="font-size:0.9rem; color:#888; font-weight:normal;">/ 500ml</span></div>
+                <button class="action-btn" onclick="orderProduct('Pure Cow Ghee', '500ml', 350)" style="width: 100%;">Order Now</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Care Taker | Realcare SoftTech Pvt.Ltd.</p>
+            <p style="margin-top: 10px;"><a href="contact.html" style="color: #ffd700; text-decoration: none;">Contact Us</a></p>
+        </div>
+    </footer>
+
+    <!-- Initialize Supabase & Base utilities from script.js explicitly -->
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Dedicated ordering logic mapping to "orders" table.
+        async function orderProduct(name, quantity, price) {
+            // Prevent multiple orders while processing
+            if(!supabase) return alert('Supabase connection is not available yet. Please refresh the page.');
+            
+            const confirmOrder = confirm(`Do you want to confirm your specific order for ${name} (${quantity}) at ₹${price}?`);
+            if(!confirmOrder) return;
+            
+            const trackingId = 'ORD-' + Math.floor(1000 + Math.random() * 9000);
+            
+            try {
+                // Send the structure to Supabase "orders" table
+                const { error } = await supabase.from('orders').insert([{
+                    id: trackingId,
+                    item_name: name,
+                    quantity: quantity,
+                    price_inr: price,
+                    status: 'Pending Review',
+                    payment_status: 'Unpaid (Cash on Delivery)',
+                    created_at: new Date().toISOString()
+                }]);
+                
+                if (error) throw error;
+                
+                alert(`Success! Your order for ${name} has been securely logged.\nPayment can be made on delivery.\n\nYour Order Tracking ID is: ${trackingId}`);
+            } catch(err) {
+                console.error(err);
+                alert('Oops! Order could not be placed: ' + err.message + '\n\nPlease ensure you have constructed the "orders" table in the Supabase Admin console.');
+            }
+        }
+    </script>
+</body>
+
+</html>
